@@ -1,6 +1,6 @@
 <?php
 
-class Accounts
+class Account
 {
     private $userName, $passWord, $email;
 
@@ -68,7 +68,7 @@ class AccountDB
         $userDB = self::userDB();
         $list_users = array();
         foreach ($userDB as $element) {
-            $user = new Accounts($element['username'], $element['password'], $element['email']);
+            $user = new Account($element['username'], $element['password'], $element['email']);
             $list_users[] = $user;
         }
         return $list_users;

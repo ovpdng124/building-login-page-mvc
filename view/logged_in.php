@@ -40,7 +40,7 @@
                 <th>Email</th>
             </tr>
             <?php
-            require_once 'model/accounts.php';
+            require_once 'model/account.php';
             $list = AccountDB::get_all_accounts();
             foreach ($list as $item):
                 ?>

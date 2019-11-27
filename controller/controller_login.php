@@ -1,6 +1,6 @@
 <?php
 require_once 'model/data.php';
-require_once 'model/accounts.php';
+require_once 'model/account.php';
 $action = filter_input(INPUT_POST, 'action');
 if (empty($action)) {
     $action = filter_input(INPUT_GET, 'action');
@@ -37,6 +37,7 @@ switch ($action) {
                 $name = 'passWord';
                 $value = $passWord;
                 setcookie($name, $value, time() + 30 * 24 * 3600, '/');
+                $check = 'remembered';
                 echo "<script>alert(\"Login success! Welcome $userName\")</script>";
                 include 'view/logged_in.php';
             } else {
@@ -46,6 +47,7 @@ switch ($action) {
                 $name = 'passWord';
                 $value = $passWord;
                 setcookie($name, $value, time() + 900, '/');
+                $check = 'non-remembered';
                 echo "<script>alert(\"Login success! Welcome $userName\")</script>";
                 include 'view/logged_in.php';
             }
@@ -55,12 +57,21 @@ switch ($action) {
         <?php
         break;
     case 'logout':
-        $name = 'userName';
-        $value = '';
-        setcookie($name, $value, time() - 30 * 24 * 3600, '/');
-        $name = 'passWord';
-        $value = '';
-        setcookie($name, $value, time() - 30 * 24 * 3600, '/');
+        if ($check == 'remembered'){
+            $name = 'userName';
+            $value = '';
+            setcookie($name, $value, time() - 30 * 24 * 3600, '/');
+            $name = 'passWord';
+            $value = '';
+            setcookie($name, $value, time() - 30 * 24 * 3600, '/');
+        }else{
+            $name = 'userName';
+            $value = '';
+            setcookie($name, $value, time() - 900, '/');
+            $name = 'passWord';
+            $value = '';
+            setcookie($name, $value, time() - 900, '/');
+        }
         include 'view/login_form.php';
         break;
 

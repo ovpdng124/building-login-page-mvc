@@ -42,7 +42,7 @@ switch ($action) {
             $list_products = ProductDB::get_all_products();
             $result = false;
             foreach ($cartDB as $item) {
-                if ($item['id'] == $id) {
+                if ($item['id'] == $id && $item['username'] == $userName) {
                     $result = true;
                     break;
                 }

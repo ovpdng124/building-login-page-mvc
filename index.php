@@ -3,7 +3,7 @@ $lifetime = 30*24*3600;
 session_set_cookie_params($lifetime, '/');
 session_start();
 include 'model/data.php';
-include "model/accounts.php";
+include "model/account.php";
 include 'model/product.php';
 $controller = filter_input(INPUT_POST, 'controller');
 if (empty($controller)) {
